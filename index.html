@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="viewport" content="width=1200, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>Knight Survivor </title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -627,6 +627,176 @@
             font-size: 20px;
             border: 2px solid;
         }
+/* ==================== MOBILE FIXES ==================== */
+@media (max-width: 768px) {
+    /* Make everything fit mobile screens */
+    body {
+        overflow: auto !important;
+        min-height: 100vh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    #gameContainer {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        border: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
+    }
+    
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 70vh !important;
+    }
+    
+    /* Make upgrade buttons HUGE for mobile */
+    .upgrade-option, .curse-option {
+        min-width: 90% !important;
+        margin: 20px auto !important;
+        padding: 30px 20px !important;
+        font-size: 20px !important;
+        transform: scale(1) !important;
+    }
+    
+    .upgrade-title, .curse-title {
+        font-size: 28px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .upgrade-desc, .curse-desc {
+        font-size: 20px !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Make all buttons bigger */
+    button {
+        padding: 25px 50px !important;
+        font-size: 26px !important;
+        margin: 15px !important;
+        min-width: 280px !important;
+        min-height: 80px !important;
+    }
+    
+    /* Adjust UI for mobile */
+    #ui {
+        top: 10px !important;
+        left: 10px !important;
+        right: 10px !important;
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+    }
+    
+    .stat {
+        padding: 15px 25px !important;
+        font-size: 20px !important;
+        min-width: 160px !important;
+        margin: 5px !important;
+    }
+    
+    /* Make bars bigger */
+    #healthBar, #xpBar, #shieldBar {
+        width: 90% !important;
+        left: 5% !important;
+        transform: none !important;
+    }
+    
+    #healthBar {
+        bottom: 120px !important;
+        height: 50px !important;
+    }
+    
+    #xpBar {
+        bottom: 60px !important;
+        height: 35px !important;
+    }
+    
+    #shieldBar {
+        bottom: 10px !important;
+        height: 35px !important;
+    }
+    
+    /* Fix hotbar */
+    #abilityHotbar {
+        bottom: 10px !important;
+        gap: 10px !important;
+    }
+    
+    .ability-slot {
+        width: 70px !important;
+        height: 70px !important;
+        font-size: 12px !important;
+    }
+    
+    .ability-icon {
+        font-size: 28px !important;
+    }
+    
+    /* Fix menus */
+    .menu-screen {
+        padding: 20px !important;
+        justify-content: flex-start !important;
+        padding-top: 50px !important;
+        overflow-y: auto !important;
+    }
+    
+    h1, h2 {
+        font-size: 42px !important;
+        text-align: center !important;
+        margin: 20px 0 !important;
+    }
+    
+    /* Fix shop */
+    #shopContent {
+        max-height: 60vh !important;
+        overflow-y: auto !important;
+    }
+    
+    .shop-item {
+        min-width: 90% !important;
+        margin: 15px auto !important;
+        padding: 25px 20px !important;
+    }
+    
+    /* Make notifications bigger */
+    #notification {
+        font-size: 48px !important;
+        padding: 30px !important;
+        text-align: center !important;
+    }
+    
+    /* Fix settings */
+    #settingsMenu {
+        min-width: 90% !important;
+        padding: 30px !important;
+    }
+    
+    .settings-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+    
+    .slider-container {
+        width: 100% !important;
+        margin-top: 15px !important;
+    }
+    
+    /* Fix controls text */
+    .controls p {
+        font-size: 16px !important;
+        padding: 8px 12px !important;
+        margin: 5px !important;
+    }
+    
+    /* Prevent zoom on input */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -5244,194 +5414,173 @@
             }, 2000);
         }
 
-        function showLevelUpScreen() {
-            const upgrades = [
-                { name: '⚔️ Orbiting Sword', desc: '+1 Spinning Blade that orbits around you', 
+             function showLevelUpScreen() {
+                const upgrades = [
+                   { name: '⚔️ Orbiting Sword', desc: '+1 Spinning Blade that orbits around you', 
                   apply: () => playerStats.orbitingSwords += 1 },
-                { name: '🔥 Fire Tornado', desc: 'Summon a destructive whirlwind of fire', 
-                  apply: () => playerStats.fireTornado = true },
-                { name: '⚡ Lightning Chain', desc: 'Chain lightning between multiple enemies', 
-                  apply: () => playerStats.lightningChain = true },
-                { name: '❄️ Ice Nova', desc: 'Freeze enemies in an expanding ice wave', 
-                  apply: () => playerStats.iceNova = true },
-                { name: '☄️ Meteor Shower', desc: 'Call down meteors from the sky', 
-                  apply: () => playerStats.meteorShower = true },
-                { name: '🌌 Void Rift', desc: 'Create a black hole that pulls enemies in', 
-                  apply: () => playerStats.voidRift = true },
-                { name: '🌊 Multishot', desc: '+2 Additional projectiles per attack', 
-                  apply: () => playerStats.projectileCount += 2 },
-                { name: '💎 Crit Master', desc: '+12% Critical Chance and +0.8x Damage', 
-                  apply: () => { playerStats.critChance += 0.12; playerStats.critMultiplier += 0.8; } },
-                { name: '❤️ Titan Heart', desc: '+30 Maximum Health and full heal', 
-                  apply: () => { playerStats.maxHealth += 30; playerStats.health = playerStats.maxHealth; } },
-                { name: '⚡ Rapid Fire', desc: '-25% Attack cooldown for faster shooting', 
-                  apply: () => playerStats.attackSpeed *= 0.75 },
-                { name: '🎯 Sniper', desc: '+100 Range and +1 Projectile piercing', 
-                  apply: () => { playerStats.range += 100; playerStats.piercing += 1; } },
-                { name: '💀 Devastation', desc: '+18 Base damage to all attacks', 
-                  apply: () => playerStats.damage += 18 },
-                { name: '🩸 Vampire', desc: '+10% Life Steal and 50% faster regeneration', 
-                  apply: () => { playerStats.lifeSteal += 0.1; playerStats.regeneration *= 1.5; } },
-                { name: '🏃 Speed Demon', desc: '+1.5 Movement speed', 
-                  apply: () => playerStats.speed += 1.5 }
-            ];
+               function showLevelUpScreen() {
+    const upgrades = [
+        { name: '⚔️ Orbiting Sword', desc: '+1 Spinning Blade that orbits around you', 
+          apply: () => playerStats.orbitingSwords += 1 },
+        { name: '🔥 Fire Tornado', desc: 'Summon a destructive whirlwind of fire', 
+          apply: () => playerStats.fireTornado = true },
+        { name: '⚡ Lightning Chain', desc: 'Chain lightning between multiple enemies', 
+          apply: () => playerStats.lightningChain = true },
+        { name: '❄️ Ice Nova', desc: 'Freeze enemies in an expanding ice wave', 
+          apply: () => playerStats.iceNova = true },
+        { name: '☄️ Meteor Shower', desc: 'Call down meteors from the sky', 
+          apply: () => playerStats.meteorShower = true },
+        { name: '🌌 Void Rift', desc: 'Create a black hole that pulls enemies in', 
+          apply: () => playerStats.voidRift = true },
+        { name: '🌊 Multishot', desc: '+2 Additional projectiles per attack', 
+          apply: () => playerStats.projectileCount += 2 },
+        { name: '💎 Crit Master', desc: '+12% Critical Chance and +0.8x Damage', 
+          apply: () => { playerStats.critChance += 0.12; playerStats.critMultiplier += 0.8; } },
+        { name: '❤️ Titan Heart', desc: '+30 Maximum Health and full heal', 
+          apply: () => { playerStats.maxHealth += 30; playerStats.health = playerStats.maxHealth; } },
+        { name: '⚡ Rapid Fire', desc: '-25% Attack cooldown for faster shooting', 
+          apply: () => playerStats.attackSpeed *= 0.75 },
+        { name: '🎯 Sniper', desc: '+100 Range and +1 Projectile piercing', 
+          apply: () => { playerStats.range += 100; playerStats.piercing += 1; } },
+        { name: '💀 Devastation', desc: '+18 Base damage to all attacks', 
+          apply: () => playerStats.damage += 18 },
+        { name: '🩸 Vampire', desc: '+10% Life Steal and 50% faster regeneration', 
+          apply: () => { playerStats.lifeSteal += 0.1; playerStats.regeneration *= 1.5; } },
+        { name: '🏃 Speed Demon', desc: '+1.5 Movement speed', 
+          apply: () => playerStats.speed += 1.5 }
+    ];
 
-            // Show 3 regular upgrades
-            const shuffled = upgrades.sort(() => Math.random() - 0.5).slice(0, 3);
-            const container = document.getElementById('upgradeOptions');
-            container.innerHTML = '';
+    const container = document.getElementById('upgradeOptions');
+    container.innerHTML = '';
+    
+    // Select 3 random upgrades
+    const selectedUpgrades = [];
+    const availableUpgrades = [...upgrades];
+    
+    while (selectedUpgrades.length < 3 && availableUpgrades.length > 0) {
+        const index = Math.floor(Math.random() * availableUpgrades.length);
+        selectedUpgrades.push(availableUpgrades.splice(index, 1)[0]);
+    }
+    
+    selectedUpgrades.forEach(upgrade => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'upgrade-option';
+        optionDiv.innerHTML = `
+            <div class="upgrade-title">${upgrade.name}</div>
+            <div class="upgrade-desc">${upgrade.desc}</div>
+        `;
+        
+        // Add both click and touch event listeners for mobile compatibility
+        const selectUpgrade = () => {
+            upgrade.apply();
+            hideLevelUpScreen();
+            playSound('levelup', 1.2, 0.8);
+        };
+        
+        optionDiv.addEventListener('click', selectUpgrade);
+        optionDiv.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectUpgrade();
+        });
+        
+        container.appendChild(optionDiv);
+    });
+    
+    // Show curse upgrades for higher levels
+    if (playerStats.level >= 5) {
+        showCurseUpgrades();
+    } else {
+        document.getElementById('curseOptions').innerHTML = '';
+    }
+    
+    document.getElementById('levelUpScreen').style.display = 'flex';
+}
 
-            shuffled.forEach(upgrade => {
-                const div = document.createElement('div');
-                div.className = 'upgrade-option';
-                div.innerHTML = `
-                    <div class="upgrade-title">${upgrade.name}</div>
-                    <div class="upgrade-desc">${upgrade.desc}</div>
-                `;
-                div.onclick = () => {
-                    upgrade.apply();
-                    updateUI();
-                    updateHealthBar();
-                    updateHotbar();
-                    document.getElementById('levelUpScreen').style.display = 'none';
-                    gameState = 'playing';
-                    playSound('ability', 1.2, 1);
-                    addScreenShake(10);
-                };
-                container.appendChild(div);
-            });
-
-            // Show 2 curse upgrades (40% buff, 60% debuff)
-            const curseUpgrades = [
-                {
-                    name: '⚡ Speed Gamble',
-                    buff: { 
-                        desc: 'Gain +2.5 Movement Speed', 
-                        apply: () => { playerStats.speed += 2.5; return "⚡ LIGHTNING SPEED! +2.5 Movement"; }
-                    },
-                    debuff: { 
-                        desc: 'Lose -1.5 Movement Speed', 
-                        apply: () => { playerStats.speed = Math.max(1, playerStats.speed - 1.5); return "⚡ SLOWED DOWN! -1.5 Movement"; }
-                    }
-                },
-                {
-                    name: '💪 Power Gamble',
-                    buff: { 
-                        desc: 'Gain +25 Base Damage', 
-                        apply: () => { playerStats.damage += 25; return "💪 UNSTOPPABLE FORCE! +25 Damage"; }
-                    },
-                    debuff: { 
-                        desc: 'Lose -10 Base Damage', 
-                        apply: () => { playerStats.damage = Math.max(5, playerStats.damage - 10); return "💪 POWER DRAIN! -10 Damage"; }
-                    }
-                },
-                {
-                    name: '❤️ Health Gamble',
-                    buff: { 
-                        desc: 'Gain +50 Maximum Health', 
-                        apply: () => { playerStats.maxHealth += 50; playerStats.health += 50; return "❤️ IRON WILL! +50 Max Health"; }
-                    },
-                    debuff: { 
-                        desc: 'Lose -25 Maximum Health', 
-                        apply: () => { 
-                            playerStats.maxHealth = Math.max(50, playerStats.maxHealth - 25);
-                            playerStats.health = Math.min(playerStats.health, playerStats.maxHealth);
-                            return "❤️ FRAGILE BODY! -25 Max Health";
-                        }
-                    }
-                },
-                {
-                    name: '🎯 Accuracy Gamble',
-                    buff: { 
-                        desc: 'Gain +15% Critical Chance', 
-                        apply: () => { playerStats.critChance += 0.15; return "🎯 DEADLY AIM! +15% Crit Chance"; }
-                    },
-                    debuff: { 
-                        desc: 'Lose -7% Critical Chance', 
-                        apply: () => { playerStats.critChance = Math.max(0.05, playerStats.critChance - 0.07); return "🎯 SHAKY HANDS! -7% Crit Chance"; }
-                    }
-                },
-                {
-                    name: '🌀 Ability Gamble',
-                    buff: { 
-                        desc: 'Gain -15% Cooldowns', 
-                        apply: () => { 
-                            playerStats.attackSpeed *= 0.85;
-                            return "🌀 UNLIMITED POWER! -15% Cooldowns";
-                        }
-                    },
-                    debuff: { 
-                        desc: 'Gain +25% Cooldowns', 
-                        apply: () => { 
-                            playerStats.attackSpeed *= 1.25;
-                            return "🌀 EXHAUSTED! +25% Cooldowns";
-                        }
-                    }
-                }
-            ];
-
-            // Pick 2 random curse upgrades
-            const curseShuffled = curseUpgrades.sort(() => Math.random() - 0.5).slice(0, 2);
-            const curseContainer = document.getElementById('curseOptions');
-            curseContainer.innerHTML = '';
-
-            curseShuffled.forEach(curse => {
-                const div = document.createElement('div');
-                div.className = 'curse-option';
-                div.innerHTML = `
-                    <div class="curse-title">${curse.name}</div>
-                    <div class="curse-desc">🎲 40% Chance: ${curse.buff.desc}</div>
-                    <div class="curse-desc">🎲 60% Chance: ${curse.debuff.desc}</div>
-                    <div class="curse-warning">RISK EVERYTHING FOR POWER!</div>
-                `;
-                div.onclick = () => {
-                    playSound('curse', 0.8, 1);
-                    
-                    // 40% chance for buff, 60% for debuff
-                    const isBuff = Math.random() < 0.4;
-                    const result = isBuff ? curse.buff : curse.debuff;
-                    
-                    // Apply the effect
-                    const message = result.apply();
-                    
-                    // Show result
-                    showCurseResult(isBuff, message);
-                    
-                    // Update UI
-                    updateUI();
-                    updateHealthBar();
-                    updateHotbar();
-                    
-                    // Close level up screen after delay
-                    setTimeout(() => {
-                        document.getElementById('levelUpScreen').style.display = 'none';
-                        gameState = 'playing';
-                        addScreenShake(isBuff ? 15 : 20);
-                    }, 1000);
-                };
-                curseContainer.appendChild(div);
-            });
-
-            document.getElementById('levelUpScreen').style.display = 'flex';
+  // Add this function right after showLevelUpScreen()
+function showCurseUpgrades() {
+    const curseOptions = [
+        { 
+            name: '👹 Double Damage Curse', 
+            desc: 'DOUBLE all damage, but enemies are 50% faster',
+            isBuff: true,
+            apply: () => { 
+                playerStats.damage *= 2;
+                enemies.forEach(e => e.speed *= 1.5);
+                showCurseResult(true, 'DOUBLE DAMAGE!');
+            }
+        },
+        { 
+            name: '⚡ Speed Curse', 
+            desc: 'DOUBLE your speed, but enemies have 50% more health',
+            isBuff: true,
+            apply: () => { 
+                playerStats.speed *= 2;
+                enemies.forEach(e => { e.health *= 1.5; e.maxHealth *= 1.5; });
+                showCurseResult(true, 'DOUBLE SPEED!');
+            }
+        },
+        { 
+            name: '💀 Reaper Curse', 
+            desc: 'Killing enemies heals you, but enemies deal 100% more damage',
+            isBuff: true,
+            apply: () => { 
+                playerStats.lifeSteal += 0.3;
+                enemies.forEach(e => e.damage *= 2);
+                showCurseResult(true, 'LIFE STEAL!');
+            }
+        },
+        { 
+            name: '🛡️ Tank Curse', 
+            desc: 'DOUBLE your health, but your damage is halved',
+            isBuff: true,
+            apply: () => { 
+                playerStats.maxHealth *= 2;
+                playerStats.health = playerStats.maxHealth;
+                playerStats.damage *= 0.5;
+                showCurseResult(true, 'DOUBLE HEALTH!');
+            }
         }
-
-        function showNotification(text, color = '#ffd700') {
-            const notif = document.getElementById('notification');
-            notif.textContent = text;
-            notif.style.color = color;
-            notif.style.opacity = '1';
-            notif.style.transform = 'translate(-50%, -50%) scale(1.2)';
-            
-            setTimeout(() => {
-                notif.style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 150);
-            
-            setTimeout(() => {
-                notif.style.opacity = '0';
-                notif.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            }, 2500);
-        }
-
+    ];
+    
+    const container = document.getElementById('curseOptions');
+    container.innerHTML = '';
+    
+    // Select 2 random curse upgrades
+    const selectedCurses = [];
+    const availableCurses = [...curseOptions];
+    
+    while (selectedCurses.length < 2 && availableCurses.length > 0) {
+        const index = Math.floor(Math.random() * availableCurses.length);
+        selectedCurses.push(availableCurses.splice(index, 1)[0]);
+    }
+    
+    selectedCurses.forEach(curse => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'curse-option';
+        optionDiv.innerHTML = `
+            <div class="curse-title">${curse.name}</div>
+            <div class="curse-desc">${curse.desc}</div>
+            <div class="curse-warning">High Risk, High Reward!</div>
+        `;
+        
+        // Add both click and touch event listeners for mobile compatibility
+        const selectCurse = () => {
+            curse.apply();
+            hideLevelUpScreen();
+            playSound('curse', 0.8, 1);
+        };
+        
+        optionDiv.addEventListener('click', selectCurse);
+        optionDiv.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            selectCurse();
+        });
+        
+        container.appendChild(optionDiv);
+    });
+}
         // ==================== SKIN INFORMATION POPUP ====================
         
         function showSkinInfo(skinId) {
@@ -6908,6 +7057,91 @@ mobilePauseBtn.addEventListener('click', () => {
 document.body.appendChild(mobilePauseBtn);
 
 console.log('Mobile support initialized:', isMobile);
+<!-- Mobile Controls Overlay (Hidden by default, shows on mobile) -->
+<div id="mobileControls" style="display: none; position: absolute; bottom: 100px; left: 0; right: 0; z-index: 1000; pointer-events: auto;">
+    <div style="display: flex; justify-content: space-between; padding: 20px;">
+        <!-- Movement D-pad -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: center;">
+            <div style="grid-column: 2; grid-row: 1;">
+                <button id="mobileUp" style="width: 70px; height: 70px; background: rgba(0,0,0,0.7); border: 3px solid #ffd700; color: white; font-size: 24px; border-radius: 50%;">↑</button>
+            </div>
+            <div style="grid-column: 1; grid-row: 2;">
+                <button id="mobileLeft" style="width: 70px; height: 70px; background: rgba(0,0,0,0.7); border: 3px solid #ffd700; color: white; font-size: 24px; border-radius: 50%;">←</button>
+            </div>
+            <div style="grid-column: 2; grid-row: 2;">
+                <button id="mobileDown" style="width: 70px; height: 70px; background: rgba(0,0,0,0.7); border: 3px solid #ffd700; color: white; font-size: 24px; border-radius: 50%;">↓</button>
+            </div>
+            <div style="grid-column: 3; grid-row: 2;">
+                <button id="mobileRight" style="width: 70px; height: 70px; background: rgba(0,0,0,0.7); border: 3px solid #ffd700; color: white; font-size: 24px; border-radius: 50%;">→</button>
+            </div>
+        </div>
+        
+        <!-- Action buttons -->
+        <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+            <button id="mobileAbility" style="width: 80px; height: 80px; background: rgba(255,0,0,0.7); border: 4px solid #ff0000; color: white; font-size: 16px; border-radius: 50%; font-weight: bold;">ABILITY</button>
+            <button id="mobileShoot" style="width: 80px; height: 80px; background: rgba(0,100,255,0.7); border: 4px solid #00ffff; color: white; font-size: 16px; border-radius: 50%; font-weight: bold;">FIRE</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Mobile detection and controls setup
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    // Show mobile controls
+    document.getElementById('mobileControls').style.display = 'block';
+    
+    // Adjust UI for mobile
+    document.getElementById('ui').style.top = '10px';
+    document.getElementById('ui').style.left = '10px';
+    document.getElementById('ui').style.right = '10px';
+    document.getElementById('ui').style.gap = '5px';
+    
+    // Make stats smaller on mobile
+    document.querySelectorAll('.stat').forEach(stat => {
+        stat.style.padding = '8px 15px';
+        stat.style.fontSize = '14px';
+        stat.style.minWidth = '120px';
+    });
+    
+    // Mobile control event listeners
+    const mobileKeys = {
+        'w': false, 'a': false, 's': false, 'd': false
+    };
+    
+    // Button press handlers
+    document.getElementById('mobileUp').addEventListener('touchstart', () => { mobileKeys['w'] = true; keys['w'] = true; });
+    document.getElementById('mobileUp').addEventListener('touchend', () => { mobileKeys['w'] = false; keys['w'] = false; });
+    
+    document.getElementById('mobileLeft').addEventListener('touchstart', () => { mobileKeys['a'] = true; keys['a'] = true; });
+    document.getElementById('mobileLeft').addEventListener('touchend', () => { mobileKeys['a'] = false; keys['a'] = false; });
+    
+    document.getElementById('mobileDown').addEventListener('touchstart', () => { mobileKeys['s'] = true; keys['s'] = true; });
+    document.getElementById('mobileDown').addEventListener('touchend', () => { mobileKeys['s'] = false; keys['s'] = false; });
+    
+    document.getElementById('mobileRight').addEventListener('touchstart', () => { mobileKeys['d'] = true; keys['d'] = true; });
+    document.getElementById('mobileRight').addEventListener('touchend', () => { mobileKeys['d'] = false; keys['d'] = false; });
+    
+    // Ability button
+    document.getElementById('mobileAbility').addEventListener('touchstart', () => {
+        if (player && player.activateSkinAbility) {
+            player.activateSkinAbility();
+        }
+    });
+    
+    // Shoot button
+    document.getElementById('mobileShoot').addEventListener('touchstart', () => {
+        shootAtNearestEnemy();
+    });
+    
+    // Prevent context menu on long press
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+    });
+    
+    console.log('Mobile controls activated');
+}
+</script>
     </script>
 </body>
 </html>
